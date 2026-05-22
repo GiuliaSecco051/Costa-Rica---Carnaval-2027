@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Costa Rica · Fev 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F7F4EF;
+  --white:#FFFFFF;
+  --border:#E4DDD3;
+  --text:#1C1C1C;
+  --muted:#8A8278;
+  --green:#1F4A30;
+  --green-light:#EBF3EE;
+  --green-mid:#2E6B44;
+  --amber:#92600A;
+  --amber-light:#FDF3E3;
+  --red:#8B2020;
+  --red-light:#FCEAEA;
+  --r:10px;
+}
+
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+/* HEADER */
+header{background:var(--green);padding:2.5rem 2rem 2rem;color:white}
+.h-inner{max-width:720px;margin:0 auto}
+.h-eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.5rem}
+h1{font-family:'Instrument Serif',serif;font-size:2.6rem;font-weight:400;line-height:1.05;margin-bottom:.25rem}
+h1 em{font-style:italic;color:#A8D4B4}
+.h-sub{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:1.5rem}
+.pills{display:flex;gap:.5rem;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:4px 14px;border-radius:100px;font-size:12px}
+
+/* LAYOUT */
+.page{max-width:720px;margin:0 auto;padding:2rem}
+section{margin-bottom:2.5rem}
+h2{font-family:'Instrument Serif',serif;font-size:1.2rem;font-weight:400;color:var(--green);margin-bottom:1rem}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem}
+.card+.card{margin-top:.75rem}
+
+/* HOTEL */
+.hotel-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;gap:.5rem;flex-wrap:wrap}
+.hotel-name{font-family:'Instrument Serif',serif;font-size:1.15rem;color:var(--green)}
+.hotel-loc{font-size:12px;color:var(--muted);margin-top:1px}
+.badge-green{background:var(--green-light);color:var(--green-mid);border:1px solid #C2D9CA;padding:3px 11px;border-radius:100px;font-size:11px;font-weight:500;white-space:nowrap}
+.badge-amber{background:var(--amber-light);color:var(--amber);border:1px solid #E8D0A0;padding:3px 11px;border-radius:100px;font-size:11px;font-weight:500}
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem}
+.info-item label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:2px}
+.info-item .val{font-size:14px;font-weight:500}
+.field-input{width:100%;padding:7px 11px;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:var(--bg);outline:none}
+.field-input:focus{border-color:var(--green-mid)}
+.dashed{border-style:dashed;background:transparent}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:1.75rem}
+.tl::before{content:'';position:absolute;left:5px;top:10px;bottom:10px;width:1px;background:var(--border)}
+.day{position:relative;margin-bottom:.625rem}
+.dot{position:absolute;left:-1.75rem;top:10px;width:11px;height:11px;border-radius:50%;background:var(--green-mid);border:2px solid var(--bg)}
+.dot.out{background:#2E7DAA}
+.dot.go{background:#B0481A}
+.day-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:.875rem 1rem}
+.day-head{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.day-date{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.day-title{font-size:13px;font-weight:500;color:var(--text);margin-top:1px}
+.tag{font-size:10px;padding:2px 9px;border-radius:100px;font-weight:500;white-space:nowrap}
+.tag-g{background:var(--green-light);color:var(--green-mid)}
+.tag-b{background:#E8F3FB;color:#1B5C8A}
+.tag-a{background:var(--amber-light);color:var(--amber)}
+.tag-r{background:var(--red-light);color:var(--red)}
+.acts{margin-top:.625rem;display:flex;flex-direction:column;gap:4px}
+.act{font-size:13px;color:var(--muted);padding:5px 0;border-bottom:1px solid var(--bg);display:flex;gap:8px;align-items:baseline}
+.act:last-child{border-bottom:none}
+.act-em{color:var(--text)}
+.add-btn{margin-top:.5rem;width:100%;padding:6px;background:transparent;border:1px dashed var(--border);border-radius:7px;font-size:12px;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.add-btn:hover{border-color:var(--green-mid);color:var(--green-mid)}
+
+/* BUDGET */
+.budget-top{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1rem}
+.b-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1rem}
+.b-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.25rem}
+.b-val{font-family:'Instrument Serif',serif;font-size:1.6rem;color:var(--green)}
+.b-val.total{color:var(--text)}
+.b-sub{font-size:11px;color:var(--muted);margin-top:1px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:400;padding:0 0 8px;border-bottom:1px solid var(--border)}
+td{padding:9px 0;border-bottom:1px solid var(--bg);vertical-align:middle}
+td:last-child{text-align:right;font-weight:500}
+.c-ok{color:var(--green-mid)}
+.c-p{color:var(--muted)}
+.cat-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:8px;flex-shrink:0}
+.table-footer{display:flex;justify-content:flex-end;margin-top:.75rem}
+.btn-sm{padding:6px 14px;border:1px solid var(--border);border-radius:100px;background:transparent;font-size:12px;color:var(--text);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.btn-sm:hover{background:var(--green-light);border-color:var(--green-mid);color:var(--green-mid)}
+
+/* CHECKLIST */
+.pack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem}
+.pack-cat{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1rem}
+.pack-title{font-size:12px;font-weight:500;color:var(--green);margin-bottom:.625rem;text-transform:uppercase;letter-spacing:.06em}
+.pitem{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:13px;cursor:pointer;border-bottom:1px solid var(--bg)}
+.pitem:last-child{border-bottom:none}
+.pitem input{accent-color:var(--green-mid);width:14px;height:14px;cursor:pointer;flex-shrink:0}
+.pitem span{color:var(--text);transition:color .15s}
+.pitem.done span{color:var(--muted);text-decoration:line-through}
+.pack-progress{font-size:11px;color:var(--muted);margin-bottom:.75rem}
+
+/* NOTAS */
+.notes-ta{width:100%;min-height:100px;padding:11px 14px;border:1px solid var(--border);border-radius:var(--r);font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:var(--white);resize:vertical;outline:none;line-height:1.6}
+.notes-ta:focus{border-color:var(--green-mid)}
+.notes-footer{display:flex;justify-content:flex-end;gap:.5rem;margin-top:.625rem;align-items:center}
+.btn-save{padding:7px 18px;background:var(--green);color:white;border:none;border-radius:100px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-save:hover{background:var(--green-mid)}
+.save-ok{font-size:12px;color:var(--green-mid);display:none}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:100;align-items:center;justify-content:center;padding:1rem}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--r);padding:1.5rem;width:100%;max-width:360px}
+.modal h3{font-family:'Instrument Serif',serif;font-size:1.1rem;color:var(--green);margin-bottom:1rem}
+.modal label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-top:.875rem;margin-bottom:3px}
+.modal input,.modal select{width:100%;padding:8px 11px;border:1px solid var(--border);border-radius:7px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);background:var(--white);outline:none}
+.modal input:focus,.modal select:focus{border-color:var(--green-mid)}
+.modal-btns{display:flex;justify-content:flex-end;gap:.5rem;margin-top:1.25rem}
+.btn-cancel{padding:7px 16px;background:transparent;border:1px solid var(--border);border-radius:100px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-ok{padding:7px 18px;background:var(--green);color:white;border:none;border-radius:100px;font-size:13px;cursor:pointer;font-family:'Inter',sans-serif}
+
+@media(max-width:520px){
+  .budget-top{grid-template-columns:1fr 1fr}
+  .info-row{grid-template-columns:1fr}
+  h1{font-size:2rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="h-inner">
+    <p class="h-eyebrow">Planejamento · Fev 2027</p>
+    <h1>Costa Rica<br><em>Pura Vida</em></h1>
+    <p class="h-sub">Santa Teresa · La Fortuna · Arenal · por pessoa</p>
+    <div class="pills">
+      <span class="pill">5 fev — chegada</span>
+      <span class="pill">Mint · 5–10 fev</span>
+      <span class="pill">Arenal Glamping · 10–14 fev</span>
+      <span class="pill">14 fev — volta</span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- HOSPEDAGEM -->
+  <section>
+    <h2>Hospedagem</h2>
+
+    <div class="card">
+      <div class="hotel-top">
+        <div>
+          <div class="hotel-name">Mint Santa Teresa</div>
+          <div class="hotel-loc">Santa Teresa · Costa Rica · 4.9</div>
+        </div>
+        <span class="badge-green">5–10 fev · 5 noites</span>
+      </div>
+      <div class="info-row">
+        <div class="info-item"><label>Check-in</label><div class="val">5 fev, quarta</div></div>
+        <div class="info-item"><label>Check-out</label><div class="val">10 fev, segunda</div></div>
+        <div class="info-item"><label>Valor (sua parte)</label><div class="val" style="color:var(--green-mid)">R$ 3.375</div></div>
+        <div class="info-item"><label>Status</label><div><span class="badge-green">✓ Cotado</span></div></div>
+      </div>
+      <label style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:4px">Código de reserva</label>
+      <input class="field-input" type="text" id="hotelCode" placeholder="Adicionar confirmação...">
+    </div>
+
+    <div class="card" style="margin-top:.75rem">
+      <div class="hotel-top">
+        <div>
+          <div class="hotel-name">Hotel Arenal Glamping</div>
+          <div class="hotel-loc">La Fortuna, Arenal · Costa Rica · 4.7</div>
+        </div>
+        <span class="badge-green">10–14 fev · 4 noites</span>
+      </div>
+      <div class="info-row">
+        <div class="info-item"><label>Check-in</label><div class="val">10 fev, segunda</div></div>
+        <div class="info-item"><label>Check-out</label><div class="val">14 fev, sexta</div></div>
+        <div class="info-item"><label>Valor (sua parte)</label><div class="val" id="arenalValDisplay" style="color:var(--green-mid)">R$ 2.505</div></div>
+        <div class="info-item"><label>Status</label><div><span class="badge-green">✓ Cotado</span></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:.25rem">
+        <div>
+          <label style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:4px">Cotação (R$)</label>
+          <input class="field-input" type="number" id="arenalVal" placeholder="Ex: 2505" value="2505" oninput="updateArenal(this.value)">
+        </div>
+        <div>
+          <label style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:4px">Código de reserva</label>
+          <input class="field-input" type="text" id="arenalCode" placeholder="Confirmação...">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROTEIRO -->
+  <section>
+    <h2>Roteiro</h2>
+    <div class="tl">
+
+      <div class="day">
+        <div class="dot out"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Qua · 5 fev</div><div class="day-title">Chegada</div></div>
+            <span class="tag tag-b">deslocamento</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span class="act-em">Voo GIG → SJO</span></div>
+            <div class="act"><span>—</span><span>Transfer para Santa Teresa (~3.5h ou van + balsa)</span></div>
+            <div class="act"><span>—</span><span class="act-em">Check-in Mint Santa Teresa</span></div>
+            <div class="act"><span>—</span><span>Jantar: <strong>OSA Santa Teresa</strong> — frutos do mar frescos, vista para o mar, menu costarriquenho contemporâneo</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Qui · 6 fev</div><div class="day-title">Primeiro dia em Santa Teresa</div></div>
+            <span class="tag tag-a">praia</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Aula de surf de manhã cedo</span></div>
+            <div class="act"><span>—</span><span>Brunch: <strong>Vermu</strong> — café com estilo, os Huevos Vaqueros são o prato mais pedido da cidade</span></div>
+            <div class="act"><span>—</span><span>Tarde: aluguel de ATV para explorar Mal País e as piscinas naturais</span></div>
+            <div class="act"><span>—</span><span>Sorvete: <strong>Coco Loco</strong> — sorveteria artesanal local, sabores tropicais</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Sex · 7 fev</div><div class="day-title">Reserva Cabo Blanco</div></div>
+            <span class="tag tag-g">natureza</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Café: <strong>El Patio Café</strong> — melhor café da região norte, sanduíche Gaston + banana iced coffee</span></div>
+            <div class="act"><span>—</span><span>Reserva Natural Cabo Blanco — trilha de 4.5km até praia virgem (abre qua–dom)</span></div>
+            <div class="act"><span>—</span><span>Jantar: <strong>Shambhala</strong> — restaurante indo-costarriquenho, ambiente sereno, menu vegetariano e de frutos do mar</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Sáb · 8 fev</div><div class="day-title">Mar aberto</div></div>
+            <span class="tag tag-b">mar</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Brunch: <strong>The Bakery</strong> — croissants de amêndoa e avelã, avocado toast, açaí bowl. Ambiente entre Paris e Austrália</span></div>
+            <div class="act"><span>—</span><span>Snorkeling em Isla Tortuga ou passeio de barco</span></div>
+            <div class="act"><span>—</span><span>Jantar: <strong>Eat Street</strong> — food court em containers com poke bowl, tacos, sushi. Ótimo se cada um quiser comer uma coisa diferente</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Dom · 9 fev</div><div class="day-title">Último dia em Santa Teresa</div></div>
+            <span class="tag tag-a">descanso</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Yoga de manhã no Mint</span></div>
+            <div class="act"><span>—</span><span>Brunch: <strong>Somos Santa Teresa</strong> — menu brunch até 14h, sourdough tostada, smoothie bowls tropicais, ambiente animado</span></div>
+            <div class="act"><span>—</span><span>Tarde livre: piscina, praia, leitura</span></div>
+            <div class="act"><span>—</span><span>Jantar de despedida: <strong>Koji</strong> — japonês com frutos do mar locais, ambiente íntimo</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot out"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Seg · 10 fev</div><div class="day-title">Santa Teresa → La Fortuna</div></div>
+            <span class="tag tag-b">deslocamento</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span class="act-em">Check-out Mint Santa Teresa</span></div>
+            <div class="act"><span>—</span><span>Shuttle + balsa pelo Lago Arenal (~4h) — rota mais bonita e rápida</span></div>
+            <div class="act"><span>—</span><span class="act-em">Check-in Hotel Arenal Glamping</span></div>
+            <div class="act"><span>—</span><span>Fontes termais à noite: <strong>Tabacón</strong> ou <strong>Baldi</strong></span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Ter · 11 fev</div><div class="day-title">Vulcão e catarata</div></div>
+            <span class="tag tag-g">natureza</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Café: <strong>Red Frog Coffee Roasters</strong> — melhor espresso de La Fortuna, pequeno-almoço leve</span></div>
+            <div class="act"><span>—</span><span>Trilha no Parque Nacional Arenal com guia</span></div>
+            <div class="act"><span>—</span><span>Catarata La Fortuna — queda de 70m, piscina natural na base</span></div>
+            <div class="act"><span>—</span><span>Jantar: <strong>Don Rufino</strong> — melhor fine dining de La Fortuna, reserva recomendada, cozinha costarriquenha com técnica internacional</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Qua · 12 fev</div><div class="day-title">Lago Arenal e fauna noturna</div></div>
+            <span class="tag tag-b">atividades</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Caiaque ou stand-up paddle no Lago Arenal</span></div>
+            <div class="act"><span>—</span><span>Almoço: <strong>Organico Fortuna</strong> — farm-to-table, melhor opção saudável da cidade, bowl de salada e nachos Arenal</span></div>
+            <div class="act"><span>—</span><span>Tour noturno — rãs venenosas, cobras, preguiças com guia especializado</span></div>
+            <div class="act"><span>—</span><span>Cerveja artesanal: <strong>Mercadito Arenal</strong> — gastromarket com bar de coquetéis, sushi, tacos e hamburguers gourmet</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Qui · 13 fev</div><div class="day-title">Pontes suspensas e véspera</div></div>
+            <span class="tag tag-a">descanso</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span>Pontes suspensas — caminhada na copa da floresta com vista do vulcão</span></div>
+            <div class="act"><span>—</span><span>Spa no Arenal Glamping — massagem antes do jantar</span></div>
+            <div class="act"><span>—</span><span>Jantar de véspera: <strong>Café Mediterraneo</strong> — ambiente romântico ao ar livre, vista do vulcão, menu mediterrâneo. Reservar com antecedência</span></div>
+            <div class="act"><span>—</span><span>Sorvete: <strong>Gelatoland</strong> — gelateria italiana, parada obrigatória no centro de La Fortuna</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+      <div class="day">
+        <div class="dot go"></div>
+        <div class="day-card">
+          <div class="day-head">
+            <div><div class="day-date">Sex · 14 fev</div><div class="day-title">Dia dos Namorados — volta</div></div>
+            <span class="tag tag-r">volta</span>
+          </div>
+          <div class="acts">
+            <div class="act"><span>—</span><span class="act-em">Check-out Arenal Glamping</span></div>
+            <div class="act"><span>—</span><span>Transfer La Fortuna → SJO (~3h)</span></div>
+            <div class="act"><span>—</span><span class="act-em">Voo SJO → GIG</span></div>
+          </div>
+          <button class="add-btn" onclick="openAct(this)">+ adicionar</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ORÇAMENTO -->
+  <section>
+    <h2>Orçamento <span style="font-size:13px;font-weight:400;color:var(--muted)">por pessoa</span></h2>
+
+    <div class="budget-top">
+      <div class="b-card">
+        <div class="b-label">Total</div>
+        <div class="b-val total" id="totalVal">R$ 0</div>
+        <div class="b-sub">estimado</div>
+      </div>
+      <div class="b-card">
+        <div class="b-label">Confirmado</div>
+        <div class="b-val" id="confVal">R$ 0</div>
+        <div class="b-sub">cotado / pago</div>
+      </div>
+      <div class="b-card">
+        <div class="b-label">A planejar</div>
+        <div class="b-val" style="color:var(--amber)" id="pendVal">R$ 0</div>
+        <div class="b-sub">estimativas</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr><th>Item</th><th>Status</th><th>R$</th></tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td><span class="cat-dot" style="background:var(--green-mid)"></span>Mint Santa Teresa — 5 noites <span style="font-size:11px;color:var(--muted)">(½ do total)</span></td>
+            <td><span class="tag tag-g">cotado</span></td>
+            <td class="c-ok">3.375</td>
+          </tr>
+          <tr>
+            <td><span class="cat-dot" style="background:#2E7DAA"></span>Passagens GIG → SJO (i/v)</td>
+            <td><span class="tag tag-g">cotado</span></td>
+            <td class="c-ok">3.700</td>
+          </tr>
+          <tr>
+            <td><span class="cat-dot" style="background:#B0481A"></span>Transfer aeroporto + local</td>
+            <td><span class="tag tag-a">estimativa</span></td>
+            <td class="c-p">600</td>
+          </tr>
+          <tr>
+            <td><span class="cat-dot" style="background:var(--amber)"></span>Alimentação — 9 dias</td>
+            <td><span class="tag tag-a">estimativa</span></td>
+            <td class="c-p">2.500</td>
+          </tr>
+          <tr>
+            <td><span class="cat-dot" style="background:#6B3DAA"></span>Atividades e excursões</td>
+            <td><span class="tag tag-a">estimativa</span></td>
+            <td class="c-p">1.500</td>
+          </tr>
+          <tr>
+            <td><span class="cat-dot" style="background:#1A6B8A"></span>Hotel Arenal Glamping — 4 noites <span style="font-size:11px;color:var(--muted)">(½ do total)</span></td>
+            <td><span class="tag tag-g" id="arenalStatus">cotado</span></td>
+            <td class="c-ok" id="arenalBudget">2.505</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-footer">
+        <button class="btn-sm" onclick="openExp()">+ item</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MALA -->
+  <section>
+    <h2>Mala</h2>
+    <p class="pack-progress" id="packProg">0 de 24 itens</p>
+    <div class="pack-grid">
+
+      <div class="pack-cat">
+        <div class="pack-title">Praia & Sol</div>
+        <label class="pitem"><input type="checkbox"><span>Protetor solar FPS 50+</span></label>
+        <label class="pitem"><input type="checkbox"><span>Roupa de banho (2–3x)</span></label>
+        <label class="pitem"><input type="checkbox"><span>Canga / toalha</span></label>
+        <label class="pitem"><input type="checkbox"><span>Óculos de sol</span></label>
+        <label class="pitem"><input type="checkbox"><span>Chapéu de aba</span></label>
+        <label class="pitem"><input type="checkbox"><span>Rash guard UV</span></label>
+      </div>
+
+      <div class="pack-cat">
+        <div class="pack-title">Natureza</div>
+        <label class="pitem"><input type="checkbox"><span>Tênis de trilha</span></label>
+        <label class="pitem"><input type="checkbox"><span>Repelente DEET</span></label>
+        <label class="pitem"><input type="checkbox"><span>Capa de chuva leve</span></label>
+        <label class="pitem"><input type="checkbox"><span>Garrafa de água</span></label>
+        <label class="pitem"><input type="checkbox"><span>Chinelo resistente</span></label>
+        <label class="pitem"><input type="checkbox"><span>Calça leve</span></label>
+      </div>
+
+      <div class="pack-cat">
+        <div class="pack-title">Documentos</div>
+        <label class="pitem"><input type="checkbox"><span>Passaporte válido</span></label>
+        <label class="pitem"><input type="checkbox"><span>Cópia digital dos docs</span></label>
+        <label class="pitem"><input type="checkbox"><span>Seguro viagem</span></label>
+        <label class="pitem"><input type="checkbox"><span>Cartão de crédito intl</span></label>
+        <label class="pitem"><input type="checkbox"><span>USD / colones em espécie</span></label>
+        <label class="pitem"><input type="checkbox"><span>Confirmação do hotel</span></label>
+      </div>
+
+      <div class="pack-cat">
+        <div class="pack-title">Outros</div>
+        <label class="pitem"><input type="checkbox"><span>Carregador portátil</span></label>
+        <label class="pitem"><input type="checkbox"><span>Adaptador de tomada</span></label>
+        <label class="pitem"><input type="checkbox"><span>Câmera / GoPro</span></label>
+        <label class="pitem"><input type="checkbox"><span>Kit primeiros socorros</span></label>
+        <label class="pitem"><input type="checkbox"><span>Chip internacional</span></label>
+        <label class="pitem"><input type="checkbox"><span>Antidiarreico + analgésico</span></label>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NOTAS -->
+  <section>
+    <h2>Notas</h2>
+    <textarea class="notes-ta" id="notesArea" placeholder="Lembretes, contatos, dicas..."></textarea>
+    <div class="notes-footer">
+      <span class="save-ok" id="saveOk">✓ Salvo</span>
+      <button class="btn-save" onclick="saveNotes()">Salvar</button>
+    </div>
+  </section>
+
+</div>
+
+<!-- MODAL ATIVIDADE -->
+<div class="overlay" id="actModal">
+  <div class="modal">
+    <h3>Nova atividade</h3>
+    <label>Descrição</label>
+    <input type="text" id="actText" placeholder="Ex: Aula de surf às 7h...">
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('actModal')">Cancelar</button>
+      <button class="btn-ok" onclick="addAct()">Adicionar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DESPESA -->
+<div class="overlay" id="expModal">
+  <div class="modal">
+    <h3>Nova despesa</h3>
+    <label>Item</label>
+    <input type="text" id="expItem" placeholder="Ex: Excursão Cabo Blanco">
+    <label>Valor (R$)</label>
+    <input type="number" id="expVal" placeholder="Ex: 350">
+    <label>Status</label>
+    <select id="expStatus">
+      <option value="ok">Confirmado / cotado</option>
+      <option value="est">Estimativa</option>
+    </select>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('expModal')">Cancelar</button>
+      <button class="btn-ok" onclick="addExp()">Adicionar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const TOTAL_ITEMS = 24;
+let currentCard = null;
+
+// --- ACTIVITY ---
+function openAct(btn) {
+  currentCard = btn.closest('.day-card');
+  document.getElementById('actText').value = '';
+  document.getElementById('actEmoji').value = '📌';
+  document.getElementById('actModal').classList.add('open');
+}
+
+function addAct() {
+  const text = document.getElementById('actText').value.trim();
+  if (!text) return;
+  const acts = currentCard.querySelector('.acts');
+  const d = document.createElement('div');
+  d.className = 'act';
+  d.innerHTML = `<span>—</span><span>${text}</span>`;
+  acts.appendChild(d);
+  closeModal('actModal');
+  save();
+}
+
+// --- EXPENSE ---
+function updateArenal(val) {
+  const n = parseFloat(val);
+  const display = document.getElementById('arenalValDisplay');
+  const budget = document.getElementById('arenalBudget');
+  const status = document.getElementById('arenalStatus');
+  if (n && n > 0) {
+    display.textContent = 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+    display.style.color = 'var(--green-mid)';
+    budget.textContent = Math.round(n).toLocaleString('pt-BR');
+    budget.className = 'c-ok';
+    status.textContent = 'cotado';
+    status.className = 'tag tag-g';
+  } else {
+    display.textContent = 'A cotar';
+    display.style.color = 'var(--amber)';
+    budget.textContent = '—';
+    budget.className = 'c-p';
+    status.textContent = 'a cotar';
+    status.className = 'tag tag-a';
+  }
+  calcBudget();
+  save();
+}
+
+function openExp() {
+  document.getElementById('expItem').value = '';
+  document.getElementById('expVal').value = '';
+  document.getElementById('expModal').classList.add('open');
+}
+
+function addExp() {
+  const item = document.getElementById('expItem').value.trim();
+  const val = parseFloat(document.getElementById('expVal').value) || 0;
+  const status = document.getElementById('expStatus').value;
+  if (!item) return;
+  const tbody = document.getElementById('tbody');
+  const tr = document.createElement('tr');
+  const isOk = status === 'ok';
+  tr.innerHTML = `<td><span class="cat-dot" style="background:var(--muted)"></span>${item}</td>
+    <td><span class="tag ${isOk ? 'tag-g' : 'tag-a'}">${isOk ? 'cotado' : 'estimativa'}</span></td>
+    <td class="${isOk ? 'c-ok' : 'c-p'}">${val ? val.toLocaleString('pt-BR') : '—'}</td>`;
+  tbody.appendChild(tr);
+  closeModal('expModal');
+  calcBudget();
+  save();
+}
+
+function calcBudget() {
+  let total = 0, conf = 0, pend = 0;
+  document.querySelectorAll('#tbody tr').forEach(tr => {
+    const td = tr.querySelector('td:last-child');
+    const isConf = td.classList.contains('c-ok');
+    const n = parseFloat(td.textContent.replace(/\./g,'').replace(',','.'));
+    if (!isNaN(n)) {
+      total += n;
+      if (isConf) conf += n; else pend += n;
+    }
+  });
+  const fmt = n => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+  document.getElementById('totalVal').textContent = fmt(total);
+  document.getElementById('confVal').textContent = fmt(conf);
+  document.getElementById('pendVal').textContent = fmt(pend);
+}
+
+// --- CHECKLIST ---
+function updatePack() {
+  const all = document.querySelectorAll('.pitem input');
+  const done = [...all].filter(c => c.checked).length;
+  document.getElementById('packProg').textContent = `${done} de ${all.length} itens`;
+}
+
+document.querySelectorAll('.pitem input').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.pitem').classList.toggle('done', cb.checked);
+    updatePack();
+    save();
+  });
+});
+
+// --- NOTES ---
+function saveNotes() {
+  try { localStorage.setItem('cr_notes', document.getElementById('notesArea').value); } catch(e){}
+  const ok = document.getElementById('saveOk');
+  ok.style.display = 'inline';
+  setTimeout(() => ok.style.display = 'none', 2000);
+}
+
+// --- STORAGE ---
+function save() {
+  try {
+    localStorage.setItem('cr_code', document.getElementById('hotelCode').value);
+    localStorage.setItem('cr_arenal_val', document.getElementById('arenalVal').value);
+    localStorage.setItem('cr_arenal_code', document.getElementById('arenalCode').value);
+    const checks = {};
+    document.querySelectorAll('.pitem input').forEach((cb,i) => checks[i] = cb.checked);
+    localStorage.setItem('cr_checks', JSON.stringify(checks));
+  } catch(e){}
+}
+
+function load() {
+  try {
+    const code = localStorage.getItem('cr_code');
+    if (code) document.getElementById('hotelCode').value = code;
+    const arenalVal = localStorage.getItem('cr_arenal_val') || '2505';
+    document.getElementById('arenalVal').value = arenalVal;
+    updateArenal(arenalVal);
+    const arenalCode = localStorage.getItem('cr_arenal_code');
+    if (arenalCode) document.getElementById('arenalCode').value = arenalCode;
+    const notes = localStorage.getItem('cr_notes');
+    if (notes) document.getElementById('notesArea').value = notes;
+    const checks = JSON.parse(localStorage.getItem('cr_checks') || '{}');
+    document.querySelectorAll('.pitem input').forEach((cb,i) => {
+      if (checks[i]) { cb.checked = true; cb.closest('.pitem').classList.add('done'); }
+    });
+  } catch(e){}
+  updatePack();
+  calcBudget();
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
+
+['hotelCode','arenalCode'].forEach(id => {
+  document.getElementById(id).addEventListener('input', save);
+});
+
+load();
+</script>
+</body>
+</html>
